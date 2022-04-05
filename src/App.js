@@ -15,8 +15,8 @@ function App() {
       <Router>
       <Navigation />
       <Routes>
+        <Route path="/" element={<Todos />}/>
         <Route path="/Login" element={<Login />}/>
-        <Route path="/Todos" element={<Todos />}/>
         <Route path="/Categories" element={<Categories />}/>
         <Route path="*" element={<NotFound />}/>
       </Routes>
