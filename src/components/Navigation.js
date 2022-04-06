@@ -5,24 +5,24 @@ import { useAuth } from '../contexts/AuthContext'
 
 export default function Navigation() {
 
-    const { login, logout, currentUser } = useAuth();
+    const { logout, currentUser } = useAuth();
 
   return (
       <div className="navigation">
         <Navbar variant="dark" expand="md" sticky="top" className="py-3 px-5">
             <Navbar.Brand href="/" >ToDo</Navbar.Brand>
             <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
+            <Navbar.Collapse className="justify-content-end ">
                 <Nav>
-                    <Link to="/" className="nav-link">
+                    <Link to="/" className="nav-link mx-2">
                         Todos
                     </Link>
-                    <Link to="/Categories" className="nav-link">
+                    <Link to="/Categories" className="nav-link mx-2">
                         Categories
                     </Link>
                     {
                   currentUser &&
-                  <Nav.Link onClick={() => logout()} className="btn btn-danger text-white mx-3">Logout</Nav.Link>
+                  <Nav.Link onClick={() => logout()} className="btn btn-danger text-white  mx-2">Log out</Nav.Link>
                     }
                 </Nav>
             </Navbar.Collapse>
