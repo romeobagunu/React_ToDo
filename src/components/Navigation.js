@@ -21,9 +21,8 @@ export default function Navigation() {
                         Categories
                     </Link>
                     {
-                  currentUser ?
-                  <Nav.Link onClick={() => logout()} className="btn btn-danger text-white mx-3">Logout</Nav.Link> :
-                  <Nav.Link onClick={() => login()} className="btn btn-success text-white mx-3">Login</Nav.Link>
+                  currentUser &&
+                  <Nav.Link onClick={() => logout()} className="btn btn-danger text-white mx-3">Logout</Nav.Link>
                     }
                 </Nav>
             </Navbar.Collapse>
