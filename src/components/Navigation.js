@@ -14,14 +14,21 @@ export default function Navigation() {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end ">
                 <Nav>
+                    {currentUser ? 
+                    <>
                     <Link to="/" className="nav-link mx-2">
                         Todos
                     </Link>
                     <Link to="/Categories" className="nav-link mx-2">
                         Categories
                     </Link>
-                    {
-                  currentUser &&
+                    </> :
+                    <>
+                    <Link to="/login" className="nav-link disabled">Todos</Link>
+                    <Link to="/login" className="nav-link disabled">Categories</Link>
+                    </>
+                    }
+                    {currentUser &&
                   <Nav.Link onClick={() => logout()} className="btn btn-danger text-white  mx-2">Log out</Nav.Link>
                     }
                 </Nav>

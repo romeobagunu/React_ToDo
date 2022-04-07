@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import './Categories.css'
+
 export default function Categories() {
 
   const [categories, setCategories] = useState([]);
@@ -16,10 +18,12 @@ export default function Categories() {
   }, []);
 
   return (
-    <section className="categories py-5">
-      <h1 className="text-center">Categories</h1>
-      <table className="table mx-auto w-50 table-secondary">
-        <thead className="table-primary">
+    <section className="categories">
+      <div className="bg-primary py-5">
+        <h1 className="text-center text-white">Categories</h1>
+      </div>
+      <table className="table mx-auto w-50 mt-5">
+        <thead>
           <tr>
             <th>Category</th>
             <th>Description</th>

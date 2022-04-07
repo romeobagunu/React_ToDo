@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Welcome from './Welcome';
 
+import './Todos.css'
+
 export default function Todos() {
 
   const [resources, setResources] = useState([]);
@@ -22,16 +24,13 @@ export default function Todos() {
     <>
       <Welcome />
       <section className="todos">
-        <h2 className="m-auto px-3">To Do:</h2>
         <article className="todoList m-auto px-3">
-          <ol>
+        <h2>To Do:</h2>
         {resources.map(item =>
-            <li key={item.TodoId} className="todo col-md-4 p-0 mx-3 my-3">
-              <h5 className="text-success">{item.Action}</h5>
-              <p className="text-muted">Done? {item.Done ? <span>Done.</span> : <span>Not Done.</span>}</p>
-            </li>
+            <div key={item.TodoId} className="todo p-3 my-3 shadow-sm rounded">
+              <h5>{item.Action}</h5>
+            </div>
         )}
-          </ol>
         </article>
       </section>
     </>

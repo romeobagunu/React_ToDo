@@ -1,0 +1,6 @@
+.categories {
+    min-height: calc(100vh - 72px);
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+  }
