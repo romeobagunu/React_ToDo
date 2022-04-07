@@ -1,26 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { useAuth } from '../../contexts/AuthContext'
+import axios from 'axios';
 
-import jumbotronImage from '../../images/jumbotron-placeholder.png'
+import Welcome from './Welcome';
 
 export default function Todos() {
 
-  const { currentUser } = useAuth();
+  const [resources, setResources] = useState([]);
+
+  const getResources = () => {
+    axios.get('http://localhost:64779/api/todos').then(response => {
+      setResources(response.data);
+    })
+  }
+
+  useEffect(() => {
+    getResources();
+  }, []);
 
   return (
-      <section className="welcome">
-      <div className="container col-xxl-8 px-4 py-5">
-          <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div className="col-10 col-sm-8 col-lg-6">
-              <img src={jumbotronImage} className="d-block mx-lg-auto img-fluid" alt="ToDo" width="700" height="500" loading="lazy"/>
-            </div>
-            <div className="col-lg-6">
-              <h1 className="display-5 fw-bold lh-1 mb-3">Welcome, {currentUser.displayName}!</h1>
-              <p className="lead">This React application uses Firebase and Github for authentication. It is also hooked up to a REST API with full CRUD functionality.</p>
-            </div>
-          </div>
-        </div>
+    <>
+      <Welcome />
+      <section className="todos">
+        <h2 className="m-auto px-3">To Do:</h2>
+        <article className="todoList m-auto px-3">
+          <ol>
+        {resources.map(item =>
+            <li key={item.TodoId} className="todo col-md-4 p-0 mx-3 my-3">
+              <h5 className="text-success">{item.Action}</h5>
+              <p className="text-muted">Done? {item.Done ? <span>Done.</span> : <span>Not Done.</span>}</p>
+            </li>
+        )}
+          </ol>
+        </article>
       </section>
+    </>
   )
 }
