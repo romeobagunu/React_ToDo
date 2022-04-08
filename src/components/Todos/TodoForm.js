@@ -15,7 +15,7 @@ export default function TodoForm(props) {
         getCategories();
     }, []);
 
-    const cancelSubmit = () => props.setShowCreate(false);
+    const cancelSubmit = () => {props.todo ? props.setShowEdit(false) : props.setShowCreate(false)};
 
     const handleSubmit = (values) => {
         if(!props.todo) {
@@ -30,7 +30,17 @@ export default function TodoForm(props) {
             })
         }
         else {
-            console.log('Edit Mode!')
+            const todoToEdit = {
+                TodoId: props.todo.TodoId,
+                Action: values.Action,
+                Done: values.Done,
+                CategoryId: values.CategoryId
+            }
+            axios.put('http://localhost:64779/api/todos', todoToEdit).then(() => {
+                props.getTodos();
+                props.setShowEdit(false);
+            })
+
         }
     }
   return (
@@ -45,18 +55,18 @@ export default function TodoForm(props) {
         >
         {({errors, touched}) => (
             <Form>
-                <Field name="Action" className="form-control my-2 w-75 mx-auto" placeholder="Todo"/>
+                <Field name="Action" className="form-control my-2" placeholder="Todo"/>
                 {errors.Action && touched.Action ?
-                <div className="alert alert-danger w-50 mx-auto py-1">{errors.Action}</div> : null}
+                <div className="alert alert-danger py-1 my-2">{errors.Action}</div> : null}
                 <div className="form-group">
-                    <Field name="CategoryId" as="select" className="form-control w-75 mx-auto">
-                    <option value="" disabled>--Click here to select a Category--</option>
+                    <Field name="CategoryId" as="select" className="form-control">
+                    <option value="" disabled>--Category--</option>
                     {categories.map(cat => 
                     <option key={cat.CategoryId} value={cat.CategoryId}>{cat.CategoryName}</option>
                     )}
                     </Field>
                     {errors.CategoryId && touched.CategoryId ? 
-                    <div className="alert alert-danger w-50 mx-auto py-1">{errors.CategoryId}</div> : null}
+                    <div className="alert alert-danger py-1 my-2">{errors.CategoryId}</div> : null}
                 </div>
                 <div className="form-group d-flex justify-content-end my-3">
                     <button className="btn btn-secondary mx-2" onClick={() => cancelSubmit()}>Cancel</button>

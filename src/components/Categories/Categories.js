@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext'
 
 import './Categories.css'
 import CatCreate from './CatCreate';
+import SingleCategory from './SingleCategory';
 
 export default function Categories() {
 
@@ -29,9 +30,7 @@ export default function Categories() {
         <h1 className="text-center text-white">Categories</h1>
       </div>
       {currentUser.email === process.env.REACT_APP_EMAIL_ADMIN &&
-        <article className="bg-dark rounded text-center py-5 my-5">
-          <div className="adminDashboard mx-auto w-75">
-          <h2 className="display-3 text-white">Admin Dashboard</h2>
+        <div className="my-3 text-center">
           {!showCreate ?
           <button className="btn btn-success" onClick={() => setShowCreate(true)}>Add Category</button> :
             <div className="createForm bg-white p-3 rounded">
@@ -41,22 +40,20 @@ export default function Categories() {
                 />
             </div>
           }
-          </div>
-        </article>
-        }
-      <table className="table mx-auto w-50 mt-5">
+        </div>
+      }
+      <table className="table mx-auto mt-2 w-75">
         <thead>
           <tr>
             <th>Category</th>
             <th>Description</th>
+            {currentUser.email === process.env.REACT_APP_EMAIL_ADMIN && 
+            <th>Admin Buttons</th>}
           </tr>
         </thead>
         <tbody>
       {categories.map(item =>
-        <tr key={item.CategoryId}>
-          <td>{item.CategoryName}</td>
-          <td>{item.CategoryDescription}</td>
-        </tr>
+        <SingleCategory key={item.CategoryId} category={item} getCategories={getCategories}/>
       )}
         </tbody>
       </table>

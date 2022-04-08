@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function CatForm(props) {
 
-    const cancelSubmit = () => props.setShowCreate(false);
+    const cancelSubmit = () => props.cat ? props.setShowEdit(false) : props.setShowCreate(false);
 
     const handleSubmit = (values) => {
         if(!props.cat){
@@ -19,7 +19,16 @@ export default function CatForm(props) {
             })
         }
         else {
-            console.log('Edit Mode!');
+            const catEdited = {
+                CategoryId: props.cat.CategoryId,
+                CategoryName: values.CategoryName,
+                CategoryDescription: values.CategoryDescription
+            }
+            console.log(catEdited);
+            axios.put('http://localhost:64779/api/categories/', catEdited).then(() => {
+                props.getCategories();
+                props.setShowEdit(false);
+            })
         }
     }
 
@@ -39,7 +48,7 @@ export default function CatForm(props) {
             <div className="alert alert-danger w-50 mx-auto py-1">{errors.CategoryName}</div> : null }
             <Field name="CategoryDescription" className="form-control my-2 w-75 mx-auto" placeholder="Description"/>
             {errors.CategoryDescription && touched.CategoryDescription ?
-            <div className="alert alert-danger w-50 mx-auto">{errors.CategoryDescription}</div> : null }
+            <div className="alert alert-danger w-50 mx-auto py-1">{errors.CategoryDescription}</div> : null }
             <div className="form-group d-flex justify-content-end my-3">
                 <button className="btn btn-secondary mx-2" onClick={() => cancelSubmit()}>Cancel</button>
                 <button type="submit" className="btn btn-success mx-2">Submit</button>

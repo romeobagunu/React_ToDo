@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 const todoSchema = Yup.object().shape({
     Action: Yup.string().max(50, 'Cannot exceed 50 characters.').required('*Please enter a Todo.'),
     Done: Yup.boolean().required('*'),
-    CategoryId: Yup.number().required('Please select a Category.')
+    CategoryId: Yup.number().required('*Please select a Category.')
 })
 
 const catSchema = Yup.object().shape({
