@@ -18,9 +18,7 @@ export default function SingleTodo(props) {
 
     const deleteTodo = (id) => {
         if(window.confirm(`Are you sure you want to delete ${props.todo.Action}?`)) {
-            axios.delete(`http://localhost:64779/api/todos/${id}/`).then(() => {
-                props.getTodos();
-            })
+            axios.delete(`http://localhost:64779/api/todos/${id}/`).then(() => props.getTodos())
         }
     }
 
@@ -33,18 +31,21 @@ export default function SingleTodo(props) {
         }
         console.log(todoToFlip);
         axios.put('http://localhost:64779/api/todos/', todoToFlip).then(() => {
-            !props.todo.Done ? document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
+            !props.todo.Done ? document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : 
+            document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
         }).then(() => {
-            props.getTodos()
-            ;});
+            props.getTodos();
+        });
     }
 
     useEffect(() => {
-        props.todo.Done ? document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
+        props.todo.Done ? 
+        document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : 
+        document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
     }, [props.todo]);
 
   return (
-    <div key={props.todo.TodoId} className="todo">
+    <div key={props.todo.TodoId} className="todo shadow-sm rounded" id={`todo-${props.todo.TodoId}`}>
         <div className="todoCheckbox">
         {!props.todo.Done ? 
             <button className="btn btn-secondary" onClick={() => flipTodo()}>
@@ -55,8 +56,9 @@ export default function SingleTodo(props) {
             </button>
         }
         </div>
-        <div className="todoText shadow-sm rounded" id={`todo-${props.todo.TodoId}`} >
-            <h5 className="py-0 my-0">{props.todo.Action}</h5>
+        <div className="todoText" id={`todo-${props.todo.TodoId}-bubble`} >
+            <p>{props.todo.Category.CategoryName}</p>
+            <h5>{props.todo.Action}</h5>
         </div>
         {currentUser.email === process.env.REACT_APP_EMAIL_ADMIN &&
         <div className="todoButtons">

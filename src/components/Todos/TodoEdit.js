@@ -10,7 +10,7 @@ export default function TodoEdit(props) {
         size="lg"
         >
         <Modal.Header closeButton>
-            <h2>Editing {props.todo.Action}</h2>
+            <h2>Edit Todo</h2>
         </Modal.Header>
         <Modal.Body>
             <TodoForm 

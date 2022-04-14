@@ -1,25 +1,78 @@
 .todos {
     min-height: calc(100vh - 72px);
+    overflow: hidden;
     width: 100%;
-    max-width: 1280px;
-    margin: auto;
+    margin-top: 0;
+    padding: 72px 0;
+    background: #222;
+    background: linear-gradient(-45deg, #f72585, #560bad, #3f37c9, #4cc9f0);
+	  background-size: 400% 400%;
+	  animation: gradient 15s ease infinite;
   }
-  
-  .todos h2 {
-    max-width: 1280px;
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
-  
-  .todoList {
-    max-width: 750px;
+
+  .todosWrapper {
+    width: 100%;
+    max-width: 1080px;
     margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .todoFunctions {
+    width: 20%;
+    min-width: 120px;
+    display: inline-block;
+    padding: 1em;
+    margin-left: 2%;
+  }
+  
+  .todoFunctions h2 {
+    color: #fff;
+  }
+  
+  .todoFunctions .btn {
+    display: block;
+    max-width: 100%;
+    margin: 1em 0;
+  }
+
+  .todoList {
+    color: #fff;
+    width: 75%;
+    margin-right: 3%;
+    max-width: 810px;
+    display: inline-block;
+    padding-top: 1em;
+  }
+
+  .todoList .alert {
+    max-width: 700px;
+    margin: 1em auto;
   }
 
   .todoList .todo {
     max-width: 700px;
     margin: 1em auto;
+    padding: 0 1em;
     display: flex;
     align-items: top;
     justify-content: space-between;
+    background-color: rgb(231, 231, 231);
+    color: #222;
+    position: relative;
   }
 
     .todoList .todo .todoCheckbox {
@@ -35,16 +88,25 @@
     }
 
     .todoList .todo .todoText {
-      background-color: rgb(231, 231, 231);
       width: calc(100% - 181px);
       padding: 1em;
-      display: inline-block;
       display: flex;
+      align-items: center;
+      flex-direction: column;
     }
 
     .todoList .todo .todoText h5 {
       max-height: 7em;
-      align-self: center;
+      text-align: left;
+      align-self: flex-start;
+    }
+
+    .todoList .todo .todoText p {
+      margin: 0;
+      text-align: left;
+      align-self: flex-start;
+      text-transform: uppercase;
+      font-weight: 300;
     }
 
     .todoList .todo .todoButtons {
@@ -58,8 +120,90 @@
       min-width: 35px;
     }
 
-@media (max-width: 900px) {
-  .todoButtons {
+@media (max-width: 740px) {
 
+  .createForm {
+    background: #222;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+  }
+
+  .todos {
+    padding-top: 0;
+  }
+
+  .todosWrapper {
+    display: block;
+    width: 100%;
+  }
+  .todoList {
+    margin-left: auto;
+    margin: auto;
+    min-width: 100%;
+  }
+
+  .todoList h2 {
+    text-align: center;
+  }
+
+  .todoList .todo {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 1em;
+    justify-content: space-around;
+    position: relative;
+  }
+
+  .todoList .todo .todoCheckbox {
+    padding-left: 1%;
+    min-width: 14%;
+  }
+
+  .todoList .todo .todoText {
+    min-width: 85%;
+    padding-right: 45px;
+  }
+
+  .todoList .todo .todoButtons {
+    max-width: 35px;
+    position: relative;
+  }
+
+  .todoList .todo .todoButtons .btn-info {
+    position: absolute;
+    top: 0;
+    right: -10px;
+  }
+
+  .todoList .todo .todoButtons .btn-danger {
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+  }
+
+  .todoList .alert {
+    width: 95%;
+  }
+
+  .todoFunctions {
+    display: block;
+    margin: auto;
+    width: 100vw;
+    max-width: 100vw;
+    text-align: center;
+  }
+
+  .todoFunctions h2 {
+    display: none;
+  }
+
+  .todoFunctions .btn {
+    display: inline-block;
+    min-width: 115px;
+    margin: 1em;
   }
 }
