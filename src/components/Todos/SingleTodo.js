@@ -29,23 +29,19 @@ export default function SingleTodo(props) {
             Done: !props.todo.Done,
             CategoryId: props.todo.CategoryId
         }
-        console.log(todoToFlip);
         axios.put('http://localhost:64779/api/todos/', todoToFlip).then(() => {
-            !props.todo.Done ? document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : 
-            document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
-        }).then(() => {
             props.getTodos();
         });
     }
 
-    useEffect(() => {
-        props.todo.Done ? 
-        document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : 
-        document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
-    }, [props.todo]);
+    // useEffect(() => {
+    //     props.todo.Done ? 
+    //     document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;" : 
+    //     document.getElementById(`todo-${props.todo.TodoId}`).style = "text-decoration: none;"
+    // });
 
   return (
-    <div key={props.todo.TodoId} className="todo shadow-sm rounded" id={`todo-${props.todo.TodoId}`}>
+    <div key={props.todo.TodoId} className={`todo shadow-sm rounded category-${props.todo.CategoryId} todo-${props.todo.Done}`} id={`todo-${props.todo.TodoId}`}>
         <div className="todoCheckbox">
         {!props.todo.Done ? 
             <button className="btn btn-secondary" onClick={() => flipTodo()}>

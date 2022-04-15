@@ -6,10 +6,11 @@
     padding: 72px 0;
     background: #222;
     background: linear-gradient(-45deg, #f72585, #560bad, #3f37c9, #4cc9f0);
-	  background-size: 400% 400%;
-	  animation: gradient 15s ease infinite;
+	  /*background-size: 400% 400%;
+	  animation: gradient 15s ease infinite;*/
   }
 
+  /*
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -21,6 +22,18 @@
       background-position: 0% 50%;
     }
   }
+  */
+
+  .categoriesWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+  }
+
+    .categoryButton {
+      display: block;
+    }
 
   .todosWrapper {
     width: 100%;

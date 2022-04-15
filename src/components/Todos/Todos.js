@@ -7,34 +7,41 @@ import { useAuth } from '../../contexts/AuthContext'
 import './Todos.css'
 import TodoCreate from './TodoCreate';
 import SingleTodo from './SingleTodo';
+import CategoryButtons from './CategoryButtons';
 
 export default function Todos() {
 
   const { currentUser } = useAuth();
-
-  const [showCreate, setShowCreate] = useState(false);
   
   const [todos, setTodos] = useState([]);
-  
-  const [noTodos, setNoTodos] = useState(false);
 
   const [hidingDone, setHidingDone] = useState(false);
+
+  const [noTodos, setNoTodos] = useState(false);
+
+  const [showCreate, setShowCreate] = useState(false);
+
+  const markupTodos = () => {
+    Array.from(document.getElementsByClassName("todo-true")).forEach((todo) => {
+      todo.style = "text-decoration: line-through; background-color: rgb(25,135,84); color: #eee;";
+    });
+    Array.from(document.getElementsByClassName("todo-false")).forEach((todo) => {
+      todo.style = "text-decoration: none;";
+    });
+  }
+
   const getTodos = () => {
     axios.get('http://localhost:64779/api/todos').then((response) => {
-      setTodos(response.data);
-      setNoTodos(false);
+        setTodos(response.data);
+        setNoTodos(false);
     }).catch((error) => {
       if(error.response.status === 404) {
         setNoTodos(true);
       }
+    }).then(() => {
+      markupTodos();
     })
-  }
-
-  const hideDone = () => {
-      var todosNotDone = todos.filter(todo => todo.Done === false);
-      setTodos(todosNotDone);
-      setHidingDone(true);
-    }
+  };
 
   const deleteDone = () => {
     if(window.confirm(`Are you sure you want to delete all completed ToDo's?`)) {
@@ -58,6 +65,7 @@ export default function Todos() {
   }
 
   useEffect(() => {
+    console.log("UEF fired");
     getTodos();
   }, []);
 
@@ -65,16 +73,23 @@ export default function Todos() {
     <>
       {/* <Welcome /> */}
       <section className="todos">
+        <CategoryButtons />
         <div className="todosWrapper">
         {currentUser.email === process.env.REACT_APP_EMAIL_ADMIN &&
         <article className="todoFunctions">
           <h2>Actions</h2>
           <button className="btn btn-success" onClick={() => setShowCreate(true)}>New Todo</button>
           {!hidingDone ?
-          <button className="btn btn-secondary" onClick={() => hideDone()}>Hide Done</button> :
-          <button className="btn btn-secondary" onClick={() => {
-            getTodos();
-            setHidingDone(false);}
+          <button className="btn btn-secondary" onClick={() => 
+            {
+              setHidingDone(true);
+              getTodos();
+            }}>Hide Done</button> :
+          <button className="btn btn-secondary" onClick={() => 
+            {
+              setHidingDone(false);
+              getTodos();
+            }
           }>Show Done</button>
           }
           <button className="btn btn-secondary" onClick={() => deleteDone()}>Delete Done</button>
