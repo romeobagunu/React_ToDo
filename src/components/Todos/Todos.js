@@ -43,6 +43,22 @@ export default function Todos() {
     })
   };
 
+  const toggleDone = () => {
+    var todosDone = document.getElementsByClassName("todo-true");
+    Array.from(todosDone).forEach((todoDone) => {
+      var todoDoneElement = document.getElementById(todoDone.getAttribute("id"));
+      if(todoDoneElement.style.display === "none") {
+        todoDoneElement.style.display = "flex";
+      }
+      else if (todoDoneElement.style.display === "flex") {
+        todoDoneElement.style.display = "none";
+      }
+      else {
+        todoDoneElement.style.display = "none";
+      }
+    })
+  }
+
   const deleteDone = () => {
     if(window.confirm(`Are you sure you want to delete all completed ToDo's?`)) {
       var todosDone = todos.filter(todo => todo.Done === true);
@@ -73,24 +89,17 @@ export default function Todos() {
     <>
       {/* <Welcome /> */}
       <section className="todos">
-        <CategoryButtons />
+        <CategoryButtons 
+          hidingDone = {hidingDone}
+          />
         <div className="todosWrapper">
         {currentUser.email === process.env.REACT_APP_EMAIL_ADMIN &&
         <article className="todoFunctions">
           <h2>Actions</h2>
           <button className="btn btn-success" onClick={() => setShowCreate(true)}>New Todo</button>
-          {!hidingDone ?
-          <button className="btn btn-secondary" onClick={() => 
-            {
-              setHidingDone(true);
-              getTodos();
-            }}>Hide Done</button> :
-          <button className="btn btn-secondary" onClick={() => 
-            {
-              setHidingDone(false);
-              getTodos();
-            }
-          }>Show Done</button>
+          {!hidingDone ? 
+          <button className="btn btn-secondary" onClick={() => {setHidingDone(true); toggleDone(); }}>Hide Done</button> :
+          <button className="btn btn-secondary" onClick={() => {setHidingDone(false); toggleDone(); }}>Show Done</button>
           }
           <button className="btn btn-secondary" onClick={() => deleteDone()}>Delete Done</button>
           <button className="btn btn-danger" onClick={() => deleteAll()}>Delete All</button>

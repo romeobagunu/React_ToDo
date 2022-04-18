@@ -8,6 +8,7 @@ export default function CategoryButtons(props) {
 const [categories, setCategories] = useState([]);
 
 const showAllCategories = () => {
+    console.log("I can see hidingDone and its value is " + props.hidingDone)
     var allTodos = document.getElementsByClassName("todo");
     Array.from(allTodos).forEach((todo) => {
         document.getElementById(`${todo.getAttribute("id")}`).style.display = "flex";
@@ -34,6 +35,7 @@ useEffect(() => {
                 key={item.CategoryId}
                 category={item}
                 categories={categories}
+                hidingDone={props.hidingDone}
             />
         )}
     </div>
