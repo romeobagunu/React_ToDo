@@ -18,7 +18,7 @@ export default function SingleTodo(props) {
 
     const deleteTodo = (id) => {
         if(window.confirm(`Are you sure you want to delete ${props.todo.Action}?`)) {
-            axios.delete(`http://localhost:64779/api/todos/${id}/`).then(() => props.getTodos())
+            axios.delete(`http://todoapi.romeobagunu.com/api/todos/${id}/`).then(() => props.getTodos())
         }
     }
 
@@ -29,7 +29,7 @@ export default function SingleTodo(props) {
             Done: !props.todo.Done,
             CategoryId: props.todo.CategoryId
         }
-        axios.put('http://localhost:64779/api/todos/', todoToFlip).then(() => {
+        axios.put('http://todoapi.romeobagunu.com/api/todos/', todoToFlip).then(() => {
             props.getTodos();
         });
     }

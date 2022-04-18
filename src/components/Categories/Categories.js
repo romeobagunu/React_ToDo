@@ -15,7 +15,7 @@ export default function Categories() {
   const [categories, setCategories] = useState([]);
 
   const getCategories = () => {
-    axios.get('http://localhost:64779/api/categories').then(response => {
+    axios.get('http://todoapi.romeobagunu.com/api/categories').then(response => {
       setCategories(response.data);
     })
   }

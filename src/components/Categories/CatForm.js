@@ -13,7 +13,7 @@ export default function CatForm(props) {
                 CategoryName: values.CategoryName,
                 CategoryDescription: values.CategoryDescription
             }
-            axios.post('http://localhost:64779/api/categories', catToCreate).then(() => {
+            axios.post('http://todoapi.romeobagunu.com/api/categories', catToCreate).then(() => {
                 props.getCategories();
                 props.setShowCreate(false);
             })
@@ -25,7 +25,7 @@ export default function CatForm(props) {
                 CategoryDescription: values.CategoryDescription
             }
             console.log(catEdited);
-            axios.put('http://localhost:64779/api/categories/', catEdited).then(() => {
+            axios.put('http://todoapi.romeobagunu.com/api/categories/', catEdited).then(() => {
                 props.getCategories();
                 props.setShowEdit(false);
             })

@@ -7,7 +7,7 @@ export default function TodoForm(props) {
 
     const [categories, setCategories] = useState([]);
     const getCategories = () => {
-        axios.get('http://localhost:64779/api/categories').then(response => {
+        axios.get('http://todoapi.romeobagunu.com/api/categories').then(response => {
             setCategories(response.data)
         })
     }
@@ -24,7 +24,7 @@ export default function TodoForm(props) {
                 Done: values.Done,
                 CategoryId: values.CategoryId
             }
-            axios.post('http://localhost:64779/api/todos', todoToCreate).then(() => {
+            axios.post('http://todoapi.romeobagunu.com/api/todos', todoToCreate).then(() => {
                 props.getTodos();
                 props.setShowCreate(false);
             })
@@ -36,7 +36,7 @@ export default function TodoForm(props) {
                 Done: values.Done,
                 CategoryId: values.CategoryId
             }
-            axios.put('http://localhost:64779/api/todos', todoToEdit).then(() => {
+            axios.put('http://todoapi.romeobagunu.com/api/todos', todoToEdit).then(() => {
                 props.getTodos();
                 props.setShowEdit(false);
             })

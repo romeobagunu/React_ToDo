@@ -31,7 +31,7 @@ export default function Todos() {
   }
 
   const getTodos = () => {
-    axios.get('http://localhost:64779/api/todos').then((response) => {
+    axios.get('http://todoapi.romeobagunu.com/api/todos').then((response) => {
         setTodos(response.data);
         setNoTodos(false);
     }).catch((error) => {
@@ -65,7 +65,7 @@ export default function Todos() {
       todosDone.forEach( todoDone =>
         {
         console.log("Deleted " + todoDone.TodoId);
-        axios.delete(`http://localhost:64779/api/todos/${todoDone.TodoId}/`).then(() => getTodos())
+        axios.delete(`http://todoapi.romeobagunu.com/api/todos/${todoDone.TodoId}/`).then(() => getTodos())
       })
     }
   }
@@ -75,7 +75,7 @@ export default function Todos() {
       todos.forEach( todo =>
         {
           console.log("Deleted " + todo.TodoId);
-          axios.delete(`http://localhost:64779/api/todos/${todo.TodoId}/`).then(() => getTodos())
+          axios.delete(`http://todoapi.romeobagunu.com/api/todos/${todo.TodoId}/`).then(() => getTodos())
         })
     }
   }
